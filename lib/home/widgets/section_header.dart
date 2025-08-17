@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {
-  String title;
-  Function onViewAll;
-  SectionHeader({super.key, required this.title, required this.onViewAll});
+  final String title;
+  final Function onViewAll;
+  const SectionHeader({
+    super.key,
+    required this.title,
+    required this.onViewAll,
+  });
 
   @override
   Widget build(BuildContext context) {

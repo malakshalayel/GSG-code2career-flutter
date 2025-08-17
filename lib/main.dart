@@ -1,6 +1,8 @@
 import 'package:e_commerce_design1/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'home2/home2_screen.dart';
+
 void main() {
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Home()));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Home2Screen()));
 }

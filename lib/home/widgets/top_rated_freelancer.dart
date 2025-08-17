@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/lists_data.dart';
+import 'rating.dart';
 
 class TopRatedFreelancer extends StatelessWidget {
   const TopRatedFreelancer({super.key});
@@ -15,9 +16,10 @@ class TopRatedFreelancer extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = freelancersData[index];
           return TopRated(
-            text1: item["text1"]!,
-            text2: item["text2"]!,
+            text1: item["name"]!,
+            text2: item["title"]!,
             image: item["image"]!,
+            rating: item["rate"]!,
           );
         },
       ),
@@ -29,6 +31,7 @@ Widget TopRated({
   required String text1,
   required String text2,
   required String image,
+  required double rating,
 }) {
   return Container(
     margin: EdgeInsets.only(left: 18),
@@ -36,17 +39,7 @@ Widget TopRated({
     width: 83,
     child: Stack(
       children: [
-        Container(
-          padding: EdgeInsets.only(left: 10),
-          height: 72,
-          width: 72,
-          decoration: BoxDecoration(
-            color: Colors.blue,
-
-            shape: BoxShape.circle,
-            image: DecorationImage(image: AssetImage(image)),
-          ),
-        ),
+        CircleAvatar(backgroundImage: AssetImage(image), radius: 35),
         Positioned(
           bottom: 15,
           child: Container(
@@ -65,28 +58,7 @@ Widget TopRated({
                 ),
                 Text(text2, style: TextStyle(fontSize: 11)),
                 SizedBox(height: 5),
-                Container(
-                  width: 44,
-                  height: 23,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 240, 221, 243),
-
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.star_outlined,
-                        color: Colors.deepPurple,
-                        size: 15,
-                      ),
-                      SizedBox(width: 3),
-                      Text("4.9", style: TextStyle(fontSize: 11)),
-                    ],
-                  ),
-                ),
+                Rating(rate: rating),
               ],
             ),
           ),
