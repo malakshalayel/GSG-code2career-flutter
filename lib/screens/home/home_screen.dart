@@ -1,6 +1,6 @@
-import 'package:e_commerce_design1/home/widgets/hero_section.dart';
-import 'package:e_commerce_design1/home/widgets/top_rated_freelancer.dart';
-import 'package:e_commerce_design1/home/widgets/top_services.dart';
+import 'package:e_commerce_design1/screens/home/widgets/hero_section.dart';
+import 'package:e_commerce_design1/screens/home/widgets/top_rated_freelancer.dart';
+import 'package:e_commerce_design1/screens/home/widgets/top_services.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/best_bookings.dart';

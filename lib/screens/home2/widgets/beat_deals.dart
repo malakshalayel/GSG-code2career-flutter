@@ -1,4 +1,4 @@
-import 'package:e_commerce_design1/home/widgets/rating.dart';
+import 'package:e_commerce_design1/screens/home/widgets/rating.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 

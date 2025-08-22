@@ -1,6 +1,8 @@
+import 'package:e_commerce_design1/screens/login.dart';
 import 'package:flutter/material.dart';
 
-import '../share_widgets/search_text_field.dart';
+import '../../core/routes.dart';
+import '../../core/share_widgets/search_text_field.dart';
 import 'widgets/beat_deals.dart';
 import 'widgets/explore_me.dart';
 import 'widgets/stories.dart';
@@ -17,6 +19,12 @@ class Home2Screen extends StatelessWidget {
           Image.asset("assets/images/heart.png"),
           Image.asset("assets/images/notification.png"),
           Image.asset("assets/images/cart.png"),
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, Routes.login);
+            },
+            icon: Icon(Icons.logout),
+          ),
         ],
       ),
       body: SingleChildScrollView(
