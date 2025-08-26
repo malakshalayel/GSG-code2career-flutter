@@ -5,6 +5,7 @@ import 'package:e_commerce_design1/screens/signup.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
+  late final String name;
   Login({super.key});
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -67,8 +68,9 @@ class Login extends StatelessWidget {
   }
 
   _login(BuildContext context) {
+    name = emailController.text;
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacementNamed(context, Routes.home2);
+      Navigator.pushReplacementNamed(context, Routes.home2, arguments: name);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

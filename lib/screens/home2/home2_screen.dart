@@ -9,9 +9,10 @@ import 'widgets/stories.dart';
 
 class Home2Screen extends StatelessWidget {
   const Home2Screen({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final String? args = ModalRoute.of(context)?.settings.arguments as String ?? "Guest";
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset("assets/images/logo-79.png"),
@@ -30,6 +31,7 @@ class Home2Screen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Text('hello $args'),
             SearchTextField(),
             SizedBox(height: 10),
             Stories(),

@@ -1,5 +1,6 @@
-import 'package:e_commerce_design1/const/color.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/const/color.dart';
 
 class ExploreMore extends StatelessWidget {
   final String title;
