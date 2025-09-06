@@ -4,12 +4,23 @@ import 'package:e_commerce_design1/screens/home2/home2_screen.dart';
 import 'package:e_commerce_design1/screens/signup.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  late final String name;
+class Login extends StatefulWidget {
   Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  late String name;
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +68,8 @@ class Login extends StatelessWidget {
                   onPressed: () {
                     _login(context);
                   },
-                  child: Text("Login"),
+                  child:
+                      isLoading ? CircularProgressIndicator() : Text("Login"),
                 ),
               ],
             ),
@@ -67,7 +79,14 @@ class Login extends StatelessWidget {
     );
   }
 
-  _login(BuildContext context) {
+  _login(BuildContext context) async {
+    setState(() {
+      isLoading = true;
+    });
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      isLoading = false;
+    });
     name = emailController.text;
     if (_formKey.currentState!.validate()) {
       Navigator.pushReplacementNamed(context, Routes.home2, arguments: name);

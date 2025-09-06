@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'core/routes.dart';
 import 'screens/home2/home2_screen.dart';
 import 'screens/login.dart';
-import 'screens/main_app.dart';
+import 'screens/products/products_screen.dart';
 
 void main() {
   runApp(
@@ -19,7 +19,7 @@ void main() {
         Routes.home2: (context) => Home2Screen(),
         Routes.freelancerDetails: (context) => FreelancerDetails(),
       },
-      home: Home(),
+      home: ProductsScreen(),   
     ),
   );
 }

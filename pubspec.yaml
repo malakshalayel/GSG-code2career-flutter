@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.2.0
+  http: ^1.5.0
   readmore: ^3.0.0
 
 dev_dependencies:
