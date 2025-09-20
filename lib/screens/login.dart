@@ -1,14 +1,16 @@
 import 'package:e_commerce_design1/core/custom_text_field.dart';
 import 'package:e_commerce_design1/core/routes.dart';
-import 'package:e_commerce_design1/screens/home2/home2_screen.dart';
-import 'package:e_commerce_design1/screens/signup.dart';
+import 'package:e_commerce_design1/screens/home/home_screen.dart';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
+  static const String userCredentialsKey = 'user_credentials';
 }
 
 class _LoginState extends State<Login> {
@@ -89,7 +91,13 @@ class _LoginState extends State<Login> {
     });
     name = emailController.text;
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacementNamed(context, Routes.home2, arguments: name);
+      loginUser(emailController.text);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Home(email: emailController.text),
+        ),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -99,4 +107,9 @@ class _LoginState extends State<Login> {
       );
     }
   }
+}
+
+loginUser(String email) async {
+  final pref = await SharedPreferences.getInstance();
+  pref.setString(Login.userCredentialsKey, email);
 }

@@ -9,8 +9,8 @@ import 'widgets/recommended.dart' show Recommended;
 import 'widgets/section_header.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
-
+   Home({super.key,   this.email});
+  final String? email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +18,7 @@ class Home extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Text(email ?? ''),
             HeroSection(),
 
             SizedBox(height: 25),
