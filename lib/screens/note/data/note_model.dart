@@ -4,12 +4,22 @@ class NoteModel {
   String title;
   String content;
   String date;
+  int id;
 
-  NoteModel({required this.title, required this.content, required this.date});
+  NoteModel({
+    required this.title,
+    required this.content,
+    required this.date,
+    this.id = 0,
+  });
 
   String toJson() {
     return json.encode({'title': title, 'content': content, 'date': date});
   }
 
-  NoteModel.fromJson(Map<String, dynamic> json) : title = json['title'] ,date = json['date'] , content = json['content'];
+  NoteModel.fromJson(Map<String, dynamic> json)
+    : title = json['title'],
+      date = json['date'],
+      content = json['content'],
+      id = json['id'];
 }

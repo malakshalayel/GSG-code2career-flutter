@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:e_commerce_design1/core/custom_text_field.dart';
 import 'package:e_commerce_design1/screens/note/data/note_model.dart';
 import 'package:e_commerce_design1/screens/note/data/notes_shared_db.dart';
+import 'package:e_commerce_design1/screens/note/data/notes_sqlite_db.dart';
 import 'package:e_commerce_design1/screens/note/presentation/widgets/note_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,22 +48,20 @@ class _NotesScreenState extends State<NotesScreen> {
                       hint: 'Add You content',
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          notes.add(
-                            NoteModel(
-                              title: titleCon.text,
-                              content: contentCon.text,
-                              date:
-                                  '${DateTime.now().day} / ${DateTime.now().month}'
-                                      .toString(),
-                            ),
-                          );
-                          titleCon.clear();
-                          contentCon.clear();
-                          NotesSharedDb.updatedListAtSharedDb(notes);
-                          Navigator.pop(context);
-                        });
+                      onPressed: () async {
+                        NoteModel note = NoteModel(
+                          title: titleCon.text,
+                          content: contentCon.text,
+                          date:
+                              '${DateTime.now().day} / ${DateTime.now().month}'
+                                  .toString(),
+                        );
+                        var id = await NotesSqliteDb.insertNoteToDb(note);
+                        fetchList();
+                        titleCon.clear();
+                        contentCon.clear();
+                        // NotesSharedDb.updatedListAtSharedDb(notes);
+                        Navigator.pop(context);
                       },
                       child: Text('Add'),
                     ),
@@ -84,8 +83,10 @@ class _NotesScreenState extends State<NotesScreen> {
                   return NoteItem(
                     note: notes[index],
                     onDismissed: (direction) {
+                      NotesSqliteDb.deleteNoteFromDb(notes[index]);
+
                       notes.removeAt(index);
-                      NotesSharedDb.updatedListAtSharedDb(notes);
+                      //NotesSharedDb.updatedListAtSharedDb(notes);
                       if (notes.isEmpty) {
                         setState(() {});
                       }
@@ -97,9 +98,13 @@ class _NotesScreenState extends State<NotesScreen> {
   }
 
   fetchList() async {
-    var fetchList = await NotesSharedDb.fetchListFromSharedDb();
+    var fetchList = await NotesSqliteDb.getNotesFromDb();
     setState(() {
       notes = fetchList;
     });
+    // var fetchList = await NotesSharedDb.fetchListFromSharedDb();
+    // setState(() {
+    //   notes = fetchList;
+    // });
   }
 }
